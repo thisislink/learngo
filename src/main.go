@@ -18,5 +18,5 @@ func main() {
 	}
 	http.HandleFunc("/", ServePages)
 	fmt.Println("Listening @:", port)
-	log.Fatal(http.ListenAndServe(port, nil))
+	log.Println(http.ListenAndServe(":"+port, nil))
 }
