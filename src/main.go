@@ -14,10 +14,10 @@ func main() {
 
 	if port == "" {
 		log.Println("$PORT must be set, defaulting to 4000")
-		port = ":4000"
+		port = "9000"
 	}
+	http.ListenAndServe(":"+port, nil)
 	http.HandleFunc("/", ServePages)
 	fmt.Println("Listening @:", port)
 	log.Println(http.ListenAndServe(":"+port, nil))
-	http.ListenAndServe(":"+port, nil)
 }
