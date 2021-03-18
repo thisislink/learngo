@@ -5,3 +5,12 @@
 .home {
     max-width: 700px;
 }
+
+.navTitle {
+    text-decoration: none;
+    color: black;
+}
+
+.navTitle:hover {
+    color: #5a585a
+}
