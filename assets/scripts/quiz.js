@@ -73,18 +73,18 @@ submitButton.addEventListener('click', () => {
             quiz.innerHTML = `
             <h2>You answered yes to ${counter} question</h2>
             <p>You need a cookie banner</p>
-            <button onclick="location.reload()">Reload</button>
+            <button class="btn btn-secondary btn-sm" onclick="location.reload()">Reload</button>
         `
         } else if (counter > 1) {
             quiz.innerHTML = `
             <h2>You answered yes to ${counter} questions</h2>
             <p>You need a cookie banner</p>
-            <button onclick="location.reload()">Reload</button>
+            <button class="btn btn-secondary btn-sm" onclick="location.reload()">Reload</button>
         `
-        } else {
+        } else if (counter === 0) {
             quiz.innerHTML = `
             <h2>Congratulations! You don't need a cookie banner.</h2>
-            <button onclick="location.reload()">Reload</button>
+            <button class="btn btn-secondary btn-sm" onclick="location.reload()">Reload</button>
         `
         }
     }
