@@ -44,6 +44,14 @@ Run the above command when you've created a module.
 
 [Golint Documentation](https://github.com/golang/lint)
 
+#### Install Hot Reloading
+Auto reloading/refresh when making changes in development
+
+```
+go get -u github.com/cosmtrek/air
+```
+[Air Documentation](https://github.com/cosmtrek/air)
+
 [Back to TOC](#table-of-contents) | [Back to Top](#learngo)
 
 ## Your First Go Program
