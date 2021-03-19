@@ -6,6 +6,8 @@ import (
 )
 
 func ServePages(w http.ResponseWriter, r *http.Request) {
+	//w.Header().Set("Content-Type", "text/html")
+
 	switch r.Method {
 
 	case "GET":
@@ -13,13 +15,13 @@ func ServePages(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(path)
 
 		if path == "/" {
-			path = "../assets/pages/index.html"
+			path = "../website/index.html"
 		} else if path == "/learn" {
-			path = "../assets/pages/learn.html"
+			path = "../website/learn.html"
 		} else if path == "/about" {
-			path = "../assets/pages/about.html"
+			path = "../website/about.html"
 		} else if path == "/quiz" {
-			path = "../assets/pages/quiz.html"
+			path = "../website/quiz.html"
 		} else {
 			path = ".." + path
 		}

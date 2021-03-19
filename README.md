@@ -19,6 +19,13 @@ Fetch all dependencies
 go mod tidy
 ```
 [Go mod tidy Documentation](https://golang.org/ref/mod#go-mod-tidy)
+
+#### Using go clean -modcache
+Clear the cache
+```
+go clean -modcache
+```
+
 #### Install Godoc
 Godoc generates documentation for your Go programs
 ```
@@ -95,3 +102,23 @@ You've now setup and executed your first Go application.
 ## Create an HTML Page
 
 [Back to TOC](#table-of-contents) | [Back to TOp](#learngo)
+
+## Potential Gotchas
+For reasons unrelated to go or any vulnerabilities, my laptop crashed, which corrupted my go.sum database tree. 
+
+This resulted in anytime I tried to import anything, I was getting the following similar errors:
+```
+$ go get "github.com/gopherjs/gopherjs/js"
+go: downloading github.com/gopherjs/gopherjs v0.0.0-20210202160940-bed99a852dfe
+go get github.com/gopherjs/gopherjs/js: github.com/gopherjs/gopherjs@v0.0.0-20210202160940-bed99a852dfe: verifying module: github.com/gopherjs/gopherjs@v0.0.0-20210202160940-bed99a852dfe: initializing sumdb.Client: reading tree note: malformed note
+note:
+```
+The most relevant piece of that error being:
+```
+initializing sumdb.Client: reading tree note: malformed note
+```
+
+To resolve, I navigated to my the below location and deleted the "latest" file:
+$(go env GOPATH)/pkg/sumdb/sum.golang.org/latest
+
+Then tried the go get "whatever I'm trying to get" and it downloaded successfully.
