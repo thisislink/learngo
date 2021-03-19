@@ -40,4 +40,5 @@ func main() {
 	})
 
 	router.Run(":" + port)
+	log.Println("current port:" + port)
 }
