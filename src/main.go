@@ -15,11 +15,8 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		log.Println("$PORT must be set, defaulting to 9000")
+		log.Fatal("$PORT must be set, defaulting to 9000")
 		port = os.Getenv("PORT")
-	} else {
-		log.Fatal("Unable to set $PORT, defaulting to 9000")
-		port = "9000"
 	}
 
 	router := gin.New()
@@ -41,5 +38,5 @@ func main() {
 		c.HTML(http.StatusOK, "quiz.html", nil)
 	})
 
-	router.Run(port)
+	router.Run(":" + port)
 }
