@@ -15,11 +15,12 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		log.Fatal("$PORT must be set, defaulting to 9000")
-		port = os.Getenv("PORT")
+		log.Println("$PORT must be set, defaulting to 9000")
+		port = "9000"
 	}
 
 	router := gin.New()
+	gin.SetMode(gin.ReleaseMode)
 	router.Use(gin.Logger())
 	router.Static("/website", "../website")
 
