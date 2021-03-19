@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 )
 
 //var Port = ":4000" //local test
@@ -19,12 +19,24 @@ func main() {
 		port = "9000"
 	}
 
-	router := mux.NewRouter().StrictSlash(true)
+	router := gin.New()
+	router.Use(gin.Logger())
+	router.Static("/website", "../website")
 
-	router.HandleFunc("/", ServePages)
-	router.HandleFunc("/learn", ServePages)
-	router.HandleFunc("/about", ServePages)
-	router.HandleFunc("/quiz", ServePages)
+	router.LoadHTMLGlob("../website/*")
 
-	log.Fatal(http.ListenAndServe(":"+port, router))
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", nil)
+	})
+	router.GET("/about", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "about.html", nil)
+	})
+	router.GET("/learn", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "learn.html", nil)
+	})
+	router.GET("/quiz", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "quiz.html", nil)
+	})
+
+	router.Run(":" + port)
 }
