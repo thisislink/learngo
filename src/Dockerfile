@@ -36,9 +36,8 @@ COPY --from=builder /app/pkg ./pkg
 COPY --from=builder /app/migrations ./migrations
 # COPY --from=builder /app/tls ./tls
 
-
 # Expose port to the outside world
 EXPOSE 4000
 
 #Command to run the executable
-CMD [ "./main" ]
+CMD [ "/app/main" ]
