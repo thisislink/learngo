@@ -14,16 +14,16 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		log.Println("$PORT must be set, defaulting to 9000")
-		port = "9000"
+		port = "5000"
+		log.Println("$PORT must be set, defaulting to " + port)
+
 	}
 
 	router := gin.New()
-	gin.SetMode(gin.ReleaseMode)
 	router.Use(gin.Logger())
-	router.Static("/website", "../website")
+	router.Static("/website", "../../src/website")
 
-	router.LoadHTMLGlob("../website/*")
+	router.LoadHTMLGlob("website/*")
 
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", nil)
@@ -38,6 +38,7 @@ func main() {
 		c.HTML(http.StatusOK, "quiz.html", nil)
 	})
 
-	router.Run(":" + port)
+	//router.Run(":" + port)
 	log.Println("current port:" + port)
+	http.ListenAndServe(":"+port, router)
 }
