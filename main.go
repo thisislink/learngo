@@ -1,0 +1,44 @@
+package main
+
+import (
+	"log"
+	"net/http"
+	"os"
+
+	"github.com/gin-gonic/gin"
+)
+
+//var Port = ":4000" //local test
+
+func main() {
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "5000"
+		log.Println("$PORT must be set, defaulting to " + port)
+
+	}
+
+	router := gin.New()
+	router.Use(gin.Logger())
+	router.Static("/website", "../../src/website")
+
+	router.LoadHTMLGlob("website/*")
+
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", nil)
+	})
+	router.GET("/about", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "about.html", nil)
+	})
+	router.GET("/learn", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "learn.html", nil)
+	})
+	router.GET("/quiz", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "quiz.html", nil)
+	})
+
+	//router.Run(":" + port)
+	log.Println("current port:" + port)
+	http.ListenAndServe(":"+port, router)
+}
